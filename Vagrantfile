@@ -31,6 +31,7 @@ Vagrant.configure("2") do |config|
     i.vm.hostname = $project_name
     i.vm.network "private_network", ip: $ip_address
   end
+  machine.vm.synced_folder "~/.ansible", "/tmp/ansible"
   config.vm.provision "shell", inline: $set_environment_variables, run: "always"
   # Experiencing some bug when installing ansible via Vagrant.
   # Also, install ansible via Vagrant is very slow.
@@ -41,6 +42,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: "ansible-galaxy install --force \
     -r /vagrant/provision/requirements.yml \
     -p /vagrant/provision/roles"
+  config.vm.synced_folder "~/.ansible", "/tmp/ansible"
   config.vm.provision "ansible_local" do |ansible|
       ansible.install = false
       # ansible.install_mode = "pip"
@@ -50,7 +52,7 @@ Vagrant.configure("2") do |config|
       ansible.inventory_path = "hosts"
       ansible.become = true
       ansible.limit = "all"
-      ansible.vault_password_file = ".vault_pass-local.txt"
+      ansible.vault_password_file = "/tmp/ansible/vault_pass_insecure"
       ansible.tags = ENV['ANSIBLE_TAGS']
       ansible.verbose = ENV['ANSIBLE_VERBOSE']
   end

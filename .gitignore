@@ -3,3 +3,4 @@
 *.log
 *vault*
 *.retry
+/provision/roles
