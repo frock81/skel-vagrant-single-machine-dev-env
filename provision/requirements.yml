@@ -1,0 +1,8 @@
+# - src: geerlingguy.mysql
+#   version: 2.9.5
+
+# - src: geerlingguy.apache
+#   version: 3.1.0
+
+# - src: geerlingguy.php
+#   version: 3.7.0
