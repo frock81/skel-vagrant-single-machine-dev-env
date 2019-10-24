@@ -1,2 +1,2 @@
 [web_server]
-ldp-wp.local ansible_connection=local
+project-name.local ansible_connection=local
