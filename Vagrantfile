@@ -5,7 +5,7 @@
 $project_name = "project-name"
 
 # Check /etc/hosts and provision one ip
-$ip_address = "192.168.4.13"
+$ip_address = "192.168.4."
 
 # Sets guest environment variables.
 # @see https://github.com/hashicorp/vagrant/issues/7015
