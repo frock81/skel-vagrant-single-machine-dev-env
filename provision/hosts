@@ -1,2 +1,2 @@
-[web_server]
+[pn_server]
 project-name.local ansible_connection=local

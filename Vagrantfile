@@ -50,7 +50,7 @@ Vagrant.configure("2") do |config|
       ansible.inventory_path = "hosts"
       ansible.become = true
       ansible.limit = "all"
-      ansible.vault_password_file = ".vault_pass-local"
+      ansible.vault_password_file = ".vault_pass-local.txt"
       ansible.tags = ENV['ANSIBLE_TAGS']
       ansible.verbose = ENV['ANSIBLE_VERBOSE']
   end
