@@ -31,7 +31,7 @@ Vagrant.configure("2") do |config|
     i.vm.hostname = $project_name
     i.vm.network "private_network", ip: $ip_address
   end
-  machine.vm.synced_folder "~/.ansible", "/tmp/ansible"
+  config.vm.synced_folder "~/.ansible", "/tmp/ansible"
   config.vm.provision "shell", inline: $set_environment_variables, run: "always"
   # Experiencing some bug when installing ansible via Vagrant.
   # Also, install ansible via Vagrant is very slow.
