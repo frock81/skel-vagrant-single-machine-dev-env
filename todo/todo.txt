@@ -1,0 +1,1 @@
+Merge Vagrantfile with Lojinha-da-Paulinha
