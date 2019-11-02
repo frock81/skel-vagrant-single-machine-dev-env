@@ -33,15 +33,7 @@ Vagrant.configure("2") do |config|
   end
   config.vm.synced_folder "~/.ansible", "/tmp/ansible"
   config.vm.provision "shell", inline: $set_environment_variables, run: "always"
-  # Experiencing some bug when installing ansible via Vagrant.
-  # Also, install ansible via Vagrant is very slow.
-  config.vm.provision "shell", inline: 'bash -c "test -e /usr/bin/pip || \
-    apt-get update && apt-get install -qy python-pip"'
-  config.vm.provision "shell", inline: 'bash -c "test -e /usr/bin/ansible || \
-    pip install \'ansible==2.7.14\'"'
-  config.vm.provision "shell", inline: "ansible-galaxy install --force \
-    -r /vagrant/provision/requirements.yml \
-    -p /vagrant/provision/roles"
+  config.vm.provision "shell", path: "scripts/bootstrap.sh"
   config.vm.synced_folder "~/.ansible", "/tmp/ansible"
   config.vm.provision "ansible_local" do |ansible|
       ansible.install = false
