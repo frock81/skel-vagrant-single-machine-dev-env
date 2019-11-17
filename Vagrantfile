@@ -44,7 +44,7 @@ Vagrant.configure("2") do |config|
       ansible.inventory_path = "hosts"
       ansible.become = true
       ansible.limit = "all"
-      ansible.vault_password_file = "/tmp/ansible/vault_pass_insecure"
+      ansible.vault_password_file = "/tmp/ansible/vault_pass_insecure.txt"
       ansible.tags = ENV['ANSIBLE_TAGS']
       ansible.verbose = ENV['ANSIBLE_VERBOSE']
   end
