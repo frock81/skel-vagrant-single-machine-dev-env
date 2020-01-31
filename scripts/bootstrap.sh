@@ -1,5 +1,5 @@
 #!/bin/bash
-
+export DEBIAN_FRONTEND=noninteractive
 echo '* libraries/restart-without-asking boolean true' \
   | debconf-set-selections
 if [ -z "$(find /var/cache/apt/pkgcache.bin -mmin -1440)" ]; then
