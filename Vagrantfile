@@ -31,10 +31,12 @@ Vagrant.configure("2") do |config|
     i.vm.hostname = $project_name
     i.vm.network "private_network", ip: $ip_address
   end
+#-------------------------------------------------------------------------------
+# Provision
+#-------------------------------------------------------------------------------
   config.vm.synced_folder "~/.ansible", "/tmp/ansible"
   config.vm.provision "shell", inline: $set_environment_variables, run: "always"
   config.vm.provision "shell", path: "scripts/bootstrap.sh"
-  config.vm.synced_folder "~/.ansible", "/tmp/ansible"
   config.vm.provision "ansible_local" do |ansible|
       ansible.install = false
       # ansible.install_mode = "pip"
