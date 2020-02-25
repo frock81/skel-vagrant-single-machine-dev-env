@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Commands to be executed at the provisioner host (the one that will execute the
+# ansible-playbook command)
+
 # To fix dpkg error in provisioning.
 export DEBIAN_FRONTEND=noninteractive
 
@@ -33,3 +36,6 @@ ansible-galaxy install \
     -r /vagrant/provision/requirements.yml \
     -p /vagrant/provision/roles \
     --ignore-errors
+
+# Comment if mysql module related tasks are not used.
+dpkg-query -s python-mysqldb || apt-get -yq install python-mysqldb
