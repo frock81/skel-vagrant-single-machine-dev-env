@@ -3,4 +3,4 @@
 *.log
 *vault*
 *.retry
-/provision/roles
+/ansible/roles

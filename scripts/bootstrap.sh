@@ -3,8 +3,8 @@
 # Commands to be executed at the provisioner host (the one that will execute the
 # ansible-playbook command)
 
-SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-ANSIBLE_PATH=$SCRIPT_PATH/../provision
+# SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+ANSIBLE_PATH=/etc/ansible
 
 # To fix dpkg error in provisioning.
 export DEBIAN_FRONTEND=noninteractive
@@ -38,7 +38,8 @@ echo "Installing required roles."
 ansible-galaxy install \
     -r $ANSIBLE_PATH/requirements.yml \
     -p $ANSIBLE_PATH/roles \
-    --ignore-errors
+    --ignore-errors \
+    --ignore-certs
 
-# Comment if mysql module related tasks are not used.
-dpkg-query -s python-mysqldb || sudo apt-get -yq install python-mysqldb
+# Uncomment if mysql module related tasks are used.
+#dpkg-query -s python-mysqldb || sudo apt-get -yq install python-mysqldb
