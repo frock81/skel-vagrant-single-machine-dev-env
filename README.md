@@ -18,3 +18,4 @@ Other optional steps:
 - Uncomment directive config.vm.synced_folder in Vagrantfile for web server projects.
 - Uncomment directive v.customize in Vagrantfile if you want to disable VT-x to use with KVM.
 - Uncomment python-mysqldb install in bootstrap.sh if ansible local provisioner uses mysql module.
+- Update config.vm.box in VagrantFile (defaults to ubuntu/bionic64)
