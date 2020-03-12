@@ -34,12 +34,14 @@ echo "Installing Ansible via PIP"
 test -e /usr/bin/ansible-galaxy || sudo pip install ansible
 
 # Install required roles.
-echo "Installing required roles."
-ansible-galaxy install \
+if [ -r "$ANSIBLE_PATH/requirements.yml" ]; then
+  echo "Installing required roles."
+  ansible-galaxy install \
     -r $ANSIBLE_PATH/requirements.yml \
     -p $ANSIBLE_PATH/roles \
     --ignore-errors \
     --ignore-certs
+fi
 
 # Uncomment if mysql module related tasks are used.
 #dpkg-query -s python-mysqldb || sudo apt-get -yq install python-mysqldb
