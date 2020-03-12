@@ -45,3 +45,5 @@ fi
 
 # Uncomment if mysql module related tasks are used.
 #dpkg-query -s python-mysqldb || sudo apt-get -yq install python-mysqldb
+# dpkg-query -s python-pymysql || sudo apt-get -yq install python-pymysql
+# dpkg-query -s python3-pymysql || sudo apt-get -yq install python3-pymysql
