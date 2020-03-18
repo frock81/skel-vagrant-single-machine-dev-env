@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
       ansible.become = true
       ansible.limit = "all"
       ansible.vault_password_file = "/tmp/ansible/vault_pass_insecure"
-      ansible.limit = (defined? (env['ANSIBLE_LIMIT'])) \
+      ansible.limit = (defined? (ENV['ANSIBLE_LIMIT'])) \
         ? ENV['ANSIBLE_LIMIT'] : "all"
       ansible.tags = ENV['ANSIBLE_TAGS']
       ansible.verbose = ENV['ANSIBLE_VERBOSE']
