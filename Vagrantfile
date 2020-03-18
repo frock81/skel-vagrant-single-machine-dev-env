@@ -18,7 +18,7 @@ SCRIPT
 
 Vagrant.configure("2") do |config|
   config.ssh.insert_key = false
-  config.ssh.private_key_path = "./insecure_private_key"
+  config.ssh.private_key_path = "./ansible/insecure_private_key"
   config.vm.box = "ubuntu/bionic64"
   # Uncomment in web server projects
   # config.vm.synced_folder "src", "/var/www/html",
@@ -51,6 +51,8 @@ Vagrant.configure("2") do |config|
       ansible.become = true
       ansible.limit = "all"
       ansible.vault_password_file = "/tmp/ansible/vault_pass_insecure"
+      ansible.limit = (defined? (env['ANSIBLE_LIMIT'])) \
+        ? ENV['ANSIBLE_LIMIT'] : "all"
       ansible.tags = ENV['ANSIBLE_TAGS']
       ansible.verbose = ENV['ANSIBLE_VERBOSE']
   end
