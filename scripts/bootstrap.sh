@@ -44,6 +44,8 @@ if [ -r "$ANSIBLE_PATH/requirements.yml" ]; then
 fi
 
 # Uncomment if mysql module related tasks are used.
+# The remote host is the one that need them. Not the controller.
 #dpkg-query -s python-mysqldb || sudo apt-get -yq install python-mysqldb
+#dpkg-query -s python3-mysqldb || sudo apt-get -yq install python3-mysqldb
 # dpkg-query -s python-pymysql || sudo apt-get -yq install python-pymysql
 # dpkg-query -s python3-pymysql || sudo apt-get -yq install python3-pymysql
