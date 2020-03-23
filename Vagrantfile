@@ -42,17 +42,18 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: $set_environment_variables, run: "always"
   config.vm.provision "shell", path: "scripts/bootstrap.sh"
   config.vm.provision "ansible_local" do |ansible|
-      ansible.install = false
-      # ansible.install_mode = "pip"
-      # ansible.version = "2.7.10"
-      ansible.provisioning_path = "/etc/ansible"
-      ansible.playbook = "playbook.yml"
-      ansible.inventory_path = "hosts"
-      ansible.become = true
-      ansible.vault_password_file = "/tmp/ansible/vault_pass_insecure"
-      ansible.limit = (defined? (ENV['ANSIBLE_LIMIT'])) \
-        ? ENV['ANSIBLE_LIMIT'] : "all"
-      ansible.tags = ENV['ANSIBLE_TAGS']
-      ansible.verbose = ENV['ANSIBLE_VERBOSE']
+    ansible.compatibility_mode = "2.0"
+    ansible.install = false
+    # ansible.install_mode = "pip"
+    # ansible.version = "2.7.10"
+    ansible.provisioning_path = "/etc/ansible"
+    ansible.playbook = "playbook.yml"
+    ansible.inventory_path = "hosts"
+    ansible.become = true
+    ansible.vault_password_file = "/tmp/ansible/vault_pass_insecure"
+    ansible.limit = (defined? (ENV['ANSIBLE_LIMIT'])) \
+      ? ENV['ANSIBLE_LIMIT'] : "all"
+    ansible.tags = ENV['ANSIBLE_TAGS']
+    ansible.verbose = ENV['ANSIBLE_VERBOSE']
   end
 end
