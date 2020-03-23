@@ -10,7 +10,7 @@ Steps:
 1. Update `Vagrantfile` with `project_name` and `ip_address`
 1. Update `ansible/hosts`
 1. Update file `ansible/group_vars/project_name.yml`
-1. Update `ansible/requirements.yml`
+1. Update `ansible/requirements.yml` (don't do this when using submodules)
 1. Update `ansible/playbook.yml`
 
 Other optional steps:
