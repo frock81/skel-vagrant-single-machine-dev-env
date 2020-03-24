@@ -51,8 +51,15 @@ Vagrant.configure("2") do |config|
     ansible.inventory_path = "hosts"
     ansible.become = true
     ansible.vault_password_file = "/tmp/ansible/vault_pass_insecure"
-    # ansible.limit = (defined? (ENV['ANSIBLE_LIMIT'])) \
-    #   ? ENV['ANSIBLE_LIMIT'] : "all"
+    # Any of the below ansible_limit should work.
+    # @see https://ruby-doc.org/core-2.5.0/ENV.html
+    ansible.limit = ENV['ANSIBLE_LIMIT'] ? ENV['ANSIBLE_LIMIT'] : "all"
+    # ansible.limit = (defined?(ENV['ANSIBLE_LIMIT'])) ? ENV['ANSIBLE_LIMIT'] \
+    #   : "all"
+    # ansible.limit = ENV.include?('ANSIBLE_LIMIT') ? \
+    #   ENV['ANSIBLE_LIMIT'] : "all"
+    # ansible.limit = ENV.key?('ANSIBLE_LIMIT') ? \
+    #   ENV['ANSIBLE_LIMIT'] : "all"
     ansible.limit = ENV['ANSIBLE_LIMIT'] ? ENV['ANSIBLE_LIMIT'] : "all"
     ansible.tags = ENV['ANSIBLE_TAGS']
     ansible.verbose = ENV['ANSIBLE_VERBOSE']
