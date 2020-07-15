@@ -25,14 +25,14 @@ Vagrant.configure("2") do |config|
   # Uncomment in web server projects
   # config.vm.synced_folder "src", "/var/www/html",
   #   mount_options: ["dmode=777,fmode=777"]
-  config.vm.define $project_name do |i|
-    i.vm.provider "virtualbox" do |v|
-      v.name = $project_name
-      v.memory = 512
-      v.cpus = 1
+  config.vm.define $project_name do |machine|
+    machine.vm.provider "virtualbox" do |vbox|
+      vbox.name = $project_name
+      vbox.memory = 512
+      vbox.cpus = 1
 
       # Uncomment if you want to disable VT-x to use with KVM.
-      # v.customize ["modifyvm", :id, "--hwvirtex", "off"]
+      # vbox.customize ["modifyvm", :id, "--hwvirtex", "off"]
 
       # Uncoment to add more disks.
       # file_to_disk = File.join(VAGRANT_ROOT, '.vagrant', 'node1-disk1.vdi')
@@ -43,13 +43,13 @@ Vagrant.configure("2") do |config|
       #   'SCSI', '--port', 4, '--device', 0, '--type', 'hdd',
       #   '--medium', file_to_disk]
     end
-    i.vm.hostname = $project_name
-    i.vm.network "private_network", ip: $ip_address
+    machine.vm.hostname = $project_name
+    machine.vm.network "private_network", ip: $ip_address
   end
 #-------------------------------------------------------------------------------
 # Provision
 #-------------------------------------------------------------------------------
-  copnfig.vm.synced_folder "~/.ansible_secret", \
+  config.vm.synced_folder "~/.ansible_secret", \
       "/home/vagrant/.ansible_secret"
   copnfig.vm.synced_folder "ansible", "/etc/ansible"
   config.vm.provision "shell", inline: $set_environment_variables, run: "always"
