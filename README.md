@@ -12,6 +12,7 @@ Steps:
 1. Update file `ansible/group_vars/project_name.yml`
 1. Update `ansible/requirements.yml` (don't do this when using submodules)
 1. Update `ansible/playbook.yml`
+1. Zero-out TODO's
 1. Update `README.md`
 
 Other optional steps:
