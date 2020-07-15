@@ -1,10 +1,12 @@
 ---
 - hosts: all
   roles:
+    - role: robertdebock.bootstrap
+
   #   - role: geerlingguy.mysql
   #     tags: mysql
 
-    - role: geerlingguy.apache
+    # - role: geerlingguy.apache
   #     tags: apache
 
   #   - role: geerlingguy.php
