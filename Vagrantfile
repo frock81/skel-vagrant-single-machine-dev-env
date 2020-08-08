@@ -7,6 +7,10 @@ $project_name = "project-name"
 # Check /etc/hosts and provision one ip
 $ip_address = "192.168.4.254"
 
+# Default for machines
+$vbox_cpu = 2
+$vbox_memory = 2048
+
 # Sets guest environment variables.
 # @see https://github.com/hashicorp/vagrant/issues/7015
 $set_environment_variables = <<SCRIPT
@@ -26,8 +30,8 @@ Vagrant.configure("2") do |config|
   config.vm.define $project_name do |i|
     i.vm.provider "virtualbox" do |v|
       v.name = $project_name
-      v.memory = 512
-      v.cpus = 1
+      v.memory = $vbox_memory
+      v.cpus = $vbox_cpu
       # Uncomment if you want to disable VT-x to use with KVM.
       # v.customize ["modifyvm", :id, "--hwvirtex", "off"]
     end
