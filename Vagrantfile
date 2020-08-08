@@ -20,6 +20,8 @@ export ANSIBLE_RETRY_FILES_ENABLED=0
 EOF
 SCRIPT
 
+VAGRANT_ROOT = File.dirname(File.expand_path(__FILE__))
+
 Vagrant.configure("2") do |config|
   config.ssh.insert_key = false
   config.ssh.private_key_path = "./ansible/insecure_private_key"
@@ -33,38 +35,38 @@ Vagrant.configure("2") do |config|
       v.memory = $vbox_memory
       v.cpus = $vbox_cpu
       # Uncomment if you want to disable VT-x to use with KVM.
-      # v.customize ["modifyvm", :id, "--hwvirtex", "off"]
+      # vbox.customize ["modifyvm", :id, "--hwvirtex", "off"]
+
+      # Uncoment to add more disks.
+      # file_to_disk = File.join(VAGRANT_ROOT, '.vagrant', 'node1-disk1.vdi')
+      # unless File.exist?(file_to_disk)
+      #   vbox.customize ['createhd', '--filename', file_to_disk, '--size', 500 * 1024]
+      # end
+      # vbox.customize ['storageattach', :id, '--storagectl',
+      #   'SCSI', '--port', 4, '--device', 0, '--type', 'hdd',
+      #   '--medium', file_to_disk]
     end
-    i.vm.hostname = $project_name
-    i.vm.network "private_network", ip: $ip_address
+    machine.vm.hostname = $project_name
+    machine.vm.network "private_network", ip: $ip_address
   end
 #-------------------------------------------------------------------------------
 # Provision
 #-------------------------------------------------------------------------------
-  config.vm.synced_folder "~/.ansible", "/tmp/ansible"
-  config.vm.synced_folder "./ansible", "/etc/ansible"
+  config.vm.synced_folder "~/.ansible_secret", \
+      "/home/vagrant/.ansible_secret"
+  copnfig.vm.synced_folder "ansible", "/etc/ansible"
   config.vm.provision "shell", inline: $set_environment_variables, run: "always"
   config.vm.provision "shell", path: "scripts/bootstrap.sh"
   config.vm.provision "ansible_local" do |ansible|
     ansible.compatibility_mode = "2.0"
     ansible.install = false
-    # ansible.install_mode = "pip"
-    # ansible.version = "2.7.10"
     ansible.provisioning_path = "/etc/ansible"
-    ansible.playbook = "playbook.yml"
-    ansible.inventory_path = "hosts"
+    ansible.playbook = ENV["ANSIBLE_PLAYBOOK"] ? ENV["ANSIBLE_PLAYBOOK"] \
+      : "playbook.yml"
+    ansible.inventory_path = "hosts-dev.ini"
     ansible.become = true
-    ansible.vault_password_file = "/tmp/ansible/vault_pass_insecure"
-    # Any of the below ansible_limit should work.
-    # @see https://ruby-doc.org/core-2.5.0/ENV.html
     ansible.limit = ENV['ANSIBLE_LIMIT'] ? ENV['ANSIBLE_LIMIT'] : "all"
-    # ansible.limit = (defined?(ENV['ANSIBLE_LIMIT'])) ? ENV['ANSIBLE_LIMIT'] \
-    #   : "all"
-    # ansible.limit = ENV.include?('ANSIBLE_LIMIT') ? \
-    #   ENV['ANSIBLE_LIMIT'] : "all"
-    # ansible.limit = ENV.key?('ANSIBLE_LIMIT') ? \
-    #   ENV['ANSIBLE_LIMIT'] : "all"
-    ansible.limit = ENV['ANSIBLE_LIMIT'] ? ENV['ANSIBLE_LIMIT'] : "all"
+    ansible.vault_password_file = "/home/vagrant/.ansible_secret/vault_pass_insecure"
     ansible.tags = ENV['ANSIBLE_TAGS']
     ansible.verbose = ENV['ANSIBLE_VERBOSE']
   end
