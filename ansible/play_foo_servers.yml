@@ -1,0 +1,14 @@
+---
+- hosts: foo_servers
+#   pre_tasks:
+#     - name: install mysql role dependency packages
+#       apt:
+#         name:
+#           - python-mysqldb
+#           - python3-mysqldb
+  roles:
+    - role: robertdebock.bootstrap
+      tags: bootstrap
+  tasks:
+    - name: my first task
+      debug: msg="Hello World!"

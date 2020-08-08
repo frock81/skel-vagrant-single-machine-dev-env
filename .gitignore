@@ -1,6 +1,10 @@
 .DS_Store
 .vagrant
 *.log
-*vault*
 *.retry
+*.vdi
+*.bak
+secret-local.yml
+*vault*
+*pass*
 /ansible/roles
