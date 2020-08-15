@@ -32,8 +32,8 @@ Optional steps:
 Secrets files to be created:
 
 1. _~/.ansible_secret/vault_pass_insecure_ (relative to the home folder)
-1. _~/.ansible_secret/vault_pass_sudo_ (to store sudo password for production)
-1. _./ansible/vault_pass_prod_ (relative to the project folder to store sudo password for production)
+1. optional: _~/.ansible_secret/vault_pass_sudo_ (to store sudo password for production)
+1. optional: _./ansible/vault_pass_prod_ (relative to the project folder to store sudo password for production)
 
 Substitute the passwords accordingly.
 
