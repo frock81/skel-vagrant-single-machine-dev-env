@@ -1,0 +1,2 @@
+Add pre hook to provision ip address in /etc/hosts
+Add post hook with message

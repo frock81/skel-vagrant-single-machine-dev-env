@@ -1,10 +1,11 @@
 {
-    "project_slug": "my-project",
+    "project_name": "My New Project",
+    "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
     "vagrant_box": "ubuntu/focal64",
     "vm_cpus": 2,
     "vm_memory": 2048,
     "vm_name": "foo",
-    "ip_address": "",
+    "ip_address": "FROM /etc/hosts",
     "domain_name": "localdomain",
     "apt_cacher_url": [
         "",
