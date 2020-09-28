@@ -4,18 +4,8 @@
     - role: robertdebock.bootstrap
       tags: bootstrap
   # Use the same values as the Vagrantfile for the next vars.
-  vars:
-    # String to be prefixed to hostnames. 
-    hostname: foo
-    # String to be prefixed to ip addresses
-    ip_address: "192.168.4.253"
-    # Domain name to be appended.
-    domain_name: localdomain
-    # I added an apt-cacher-ng instance on the development machine to
-    # speed-up things. Leave empty ("") if won't use it.
-    # Example:
-    #apt_cacher_url: "http://10.0.2.2:3142"
-    apt_cacher_url: ""
+  vars_files:
+    - vars/dev.yml
   tasks:
     - name: hosts file
       lineinfile:

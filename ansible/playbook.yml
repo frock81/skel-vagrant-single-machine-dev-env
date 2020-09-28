@@ -1,3 +1,0 @@
----
-- import_playbook: play_dev.yml
-- import_playbook: play_foo_servers.yml

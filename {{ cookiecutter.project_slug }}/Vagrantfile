@@ -2,19 +2,19 @@
 # vi: set ft=ruby :
 
 # The box to be used by Vagrant.
-VAGRANT_BOX = "ubuntu/bionic64"
+VAGRANT_BOX = "{{ cookiecutter.vagrant_box }}"
 
 # Number of CPUs allocated to the virtual machine instances.
-VM_CPUS = 2
+VM_CPUS = {{ cookiecutter.vm_cpus }}
 
 # Total of RAM memory in megabytes allocated to the vm instances.
-VM_MEMORY = 2048
+VM_MEMORY = {{ cookiecutter.vm_memory }}
 
 # The prefix for the hostname and virtual machine name.
-INSTANCE_NAME = "foo"
+INSTANCE_NAME = "{{ cookiecutter.vm_name }}"
 
 # The IP address.
-IP_ADDRESS = "192.168.4.253"
+IP_ADDRESS = "{{ cookiecutter.ip_address }}"
 
 # Sets guest environment variables.
 # @see https://github.com/hashicorp/vagrant/issues/7015

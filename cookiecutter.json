@@ -1,0 +1,17 @@
+{
+    "project_slug": "my-project",
+    "vagrant_box": "ubuntu/focal64",
+    "vm_cpus": 2,
+    "vm_memory": 2048,
+    "vm_name": "foo",
+    "ip_address": "",
+    "domain_name": "localdomain",
+    "apt_cacher_url": [
+        "",
+        "http://10.0.2.2:3142"
+    ],
+    "vm_ansible_group": "{{ cookiecutter.vm_name }}_servers",
+    "_copy_without_render": [
+        "ansible/play_dev.yml"
+    ]
+}
