@@ -1,5 +1,5 @@
 ---
-- hosts: foo_servers
+- hosts: {{ cookiecutter.vm_ansible_group }}
 #   pre_tasks:
 #     - name: install mysql role dependency packages
 #       apt:
