@@ -1,0 +1,18 @@
+{
+    "project_name": "My New Project",
+    "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
+    "vagrant_box": "ubuntu/bionic64",
+    "vm_cpus": 2,
+    "vm_memory": 2048,
+    "vm_name": "foo",
+    "ip_address": "FROM /etc/hosts",
+    "domain_name": "localdomain",
+    "apt_cacher_url": [
+        "",
+        "http://10.0.2.2:3142"
+    ],
+    "vm_ansible_group": "{{ cookiecutter.vm_name }}_servers",
+    "_copy_without_render": [
+        "ansible/play_dev.yml"
+    ]
+}

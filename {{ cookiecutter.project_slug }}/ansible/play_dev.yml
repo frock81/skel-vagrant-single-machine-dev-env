@@ -1,0 +1,59 @@
+---
+- hosts: all
+  roles:
+    - role: robertdebock.bootstrap
+      tags: bootstrap
+  # Use the same values as the Vagrantfile for the next vars.
+  vars_files:
+    - vars/dev.yml
+  tasks:
+    - name: hosts file
+      lineinfile:
+        path: /etc/hosts
+        regexp: "^{{ ip_address }}\\s"
+        line: "{{ ip_address }} {{ hostname }}.{{ domain_name }}"
+        state: present
+      tags: hosts
+
+    # Causes apt lock acquisition problems.
+    - name: stop apt-daily service
+      service:
+        name: "{{ item }}"
+        state: stopped
+      with_items:
+        - apt-daily.service
+        - apt-daily.timer
+
+    - name: disable apt-daily service
+      service:
+        name: "{{ item }}"
+        enabled: no
+      with_items:
+        - apt-daily.service
+        - apt-daily.timer
+
+    # To speed-up things in my computer. Comment when done. Re-enable as needed.
+    - name: setup apt-cacher-ng
+      copy:
+        dest: /etc/apt/apt.conf
+        content: |
+          #Acquire::AllowInsecureRepositories true; # Allow to use an offline repo
+          Acquire::http::proxy "{{ apt_cacher_url }}"; # The cache proxy repo
+          Acquire::https::proxy "DIRECT"; # Allow cache proxy SSL repos
+      when: apt_cacher_url | length != 0
+
+    - name: update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 604800
+
+    - name: check apt lists directory to check if it is a new vm
+      shell: "ls -l /var/lib/apt/lists/ | grep -E 'universe|multiverse'"
+      register: result_lists
+      changed_when: False
+      ignore_errors: yes
+
+    - name: update apt cache if it is a new vm
+      apt:
+        update_cache: yes
+      when: result_lists.rc != 0

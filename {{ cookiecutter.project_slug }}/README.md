@@ -1,6 +1,6 @@
-# Skel - Single
+# {{ cookiecutter.project_name }}
 
-Skel for a vagrant single machine development environment.
+
 
 ## Preparation
 

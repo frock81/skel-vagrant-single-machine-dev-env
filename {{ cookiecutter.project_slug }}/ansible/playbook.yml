@@ -1,0 +1,3 @@
+---
+- import_playbook: play_dev.yml
+- import_playbook: play_{{ cookiecutter.vm_ansible_group }}.yml
