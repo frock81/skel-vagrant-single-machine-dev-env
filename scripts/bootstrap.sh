@@ -26,12 +26,13 @@ if ! test -e /usr/bin/python; then
   echo "Updating packages list"
   sudo apt update
   sudo echo "Installing python."
-  apt install -yq python-minimal python-pip
+  apt install -yq python-minimal python-pip python3-minimal python3-pip
 fi
 
 # Install Ansible via Python PIP.
 echo "Installing Ansible via PIP"
-test -e /usr/bin/ansible-galaxy || sudo pip install ansible
+test -e /usr/bin/ansible-galaxy || sudo pip install ansible && \
+  sudo pip3 install ansible
 
 # Install required roles.
 if [ -r "$ANSIBLE_PATH/requirements.yml" ]; then
