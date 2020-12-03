@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Commands to be executed at the provisioner host (the one that will execute the
-# ansible-playbook command)
+# ansible-playbook command). If using th vagrant ansible_local provisioner
+# it will be a virtual machine, not the host.
 
 # SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 ANSIBLE_PATH=/etc/ansible
