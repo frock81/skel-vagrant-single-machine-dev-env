@@ -14,7 +14,7 @@ export DEBIAN_FRONTEND=noninteractive
 echo '* libraries/restart-without-asking boolean true' \
   | sudo debconf-set-selections
 
-shopt -x extglob
+shopt -s extglob
 
 # Some packages may be missing because the new box doesn't have
 # repositories list, although it is configured in the sources.
