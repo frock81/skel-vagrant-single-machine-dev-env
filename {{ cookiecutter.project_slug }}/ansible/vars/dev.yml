@@ -1,15 +1,16 @@
 ---
-# String to be prefixed to hostnames. 
-hostname: {{ cookiecutter.vm_name }}
+
+# String to be prefixed to hostnames.
+hostname: "{{ cookiecutter.vm_name }}"
 
 # String to be prefixed to ip addresses
 ip_address: "{{ cookiecutter.ip_address }}"
 
 # Domain name to be appended.
-domain_name: {{ cookiecutter.domain_name }}
+domain_name: "{{ cookiecutter.domain_name }}"
 
 # I added an apt-cacher-ng instance on the development machine to
 # speed-up things. Leave empty ("") if won't use it.
 # Example:
-#apt_cacher_url: "http://10.0.2.2:3142"
+# apt_cacher_url: "http://10.0.2.2:3142"
 apt_cacher_url: "{{ cookiecutter.apt_cacher_url }}"

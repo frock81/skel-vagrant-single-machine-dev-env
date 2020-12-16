@@ -1,11 +1,11 @@
 ---
-- hosts: {{ cookiecutter.vm_ansible_group }}
-#   pre_tasks:
-#     - name: install mysql role dependency packages
-#       apt:
-#         name:
-#           - python-mysqldb
-#           - python3-mysqldb
+- hosts: "{{ cookiecutter.vm_ansible_group }}"
+  # pre_tasks:
+  #   - name: install mysql role dependency packages
+  #     apt:
+  #       name:
+  #         - python-mysqldb
+  #         - python3-mysqldb
   roles:
     - role: robertdebock.bootstrap
       tags: bootstrap

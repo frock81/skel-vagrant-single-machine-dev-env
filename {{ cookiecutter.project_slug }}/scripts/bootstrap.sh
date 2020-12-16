@@ -14,9 +14,14 @@ export DEBIAN_FRONTEND=noninteractive
 echo '* libraries/restart-without-asking boolean true' \
   | sudo debconf-set-selections
 
+shopt -x extglob
+
 # Some packages may be missing because the new box doesn't have
 # repositories list, although it is configured in the sources.
-if ! $(ls -lh /var/lib/apt/lists | grep -E "universe|multiverse" &> /dev/null); then
+#
+# Remember that for the first apt there will be no apt-cacher
+# configured via Ansible.
+if ! ls *(*universe*|*multiverse*) &> /dev/null; then
   sudo apt-get update --fix-missing && apt-get -yq upgrade
 fi
 
@@ -31,7 +36,7 @@ fi
 #   apt install -yq python-minimal python-pip python3-minimal python3-pip
 # fi
 
-if ! $(dpkg -s python3-pip &> /dev/null); then
+if ! dpkg -s python3-pip &> /dev/null; then
   sudo apt-get install -y python3-pip
 fi
 
