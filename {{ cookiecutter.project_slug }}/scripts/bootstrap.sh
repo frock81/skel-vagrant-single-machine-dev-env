@@ -33,6 +33,7 @@ fi
 if ! test -e /usr/local/bin/ansible-galaxy; then
   echo "Installing Ansible via Pip"
   sudo pip3 install ansible
+  sudo pip3 install Jinja2
 fi
 
 # Install required roles.
