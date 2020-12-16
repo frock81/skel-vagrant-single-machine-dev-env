@@ -25,17 +25,6 @@ if ! ls *(*universe*|*multiverse*) &> /dev/null; then
   sudo apt-get update --fix-missing && apt-get -yq upgrade
 fi
 
-# In the first vagrant up, python wont be installed. We use this characteristic
-# to update apt sources file.
-# if ! test -e /usr/bin/python; then
-#   sudo sed -i 's#http://archive.ubuntu.com#http://br.archive.ubuntu.com#g' \
-#     /etc/apt/sources.list
-#   echo "Updating packages list"
-#   sudo apt update
-#   sudo echo "Installing python."
-#   apt install -yq python-minimal python-pip python3-minimal python3-pip
-# fi
-
 if ! dpkg -s python3-pip &> /dev/null; then
   sudo apt-get install -y python3-pip
 fi
