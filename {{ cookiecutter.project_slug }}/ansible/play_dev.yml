@@ -5,7 +5,7 @@
       tags: bootstrap
   # Use the same values as the Vagrantfile for the next vars.
   vars_files:
-    - vars/dev.yml
+    - vars/env_dev.yml
   tasks:
     - name: hosts file
       lineinfile:
