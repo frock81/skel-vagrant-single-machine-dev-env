@@ -1,4 +1,5 @@
 #!/bin/bash
+shopt -s extglob
 
 # Commands to be executed at the provisioner host (the one that will execute the
 # ansible-playbook command). If using th vagrant ansible_local provisioner
@@ -25,6 +26,7 @@ if ! ls *(*universe*|*multiverse*) &> /dev/null; then
   sudo apt-get update --fix-missing && apt-get -yq upgrade
 fi
 
+# We will use the python3 version.
 if ! dpkg -s python3-pip &> /dev/null; then
   sudo apt-get install -y python3-pip
 fi
@@ -32,6 +34,7 @@ fi
 # Install Ansible via Python PIP.
 if ! test -e /usr/local/bin/ansible-galaxy; then
   echo "Installing Ansible via Pip"
+  # To avoid a Jinja2 update bug.
   sudo pip3 install -U Jinja2
   sudo pip3 install ansible
 fi
